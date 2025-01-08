@@ -11,18 +11,17 @@
         </tr>
       </thead>
       <tbody>
-        <!-- row 1 -->
-        <tr>
-          <th>1</th>
-          <td>Cy Ganderton</td>
-          <td>Quality Control Specialist</td>
-          <td>Blue</td>
+        <tr v-for="(project, index) in store.projects" :key="index">
+          <th>{{ index + 1 }}</th>
+          <td>{{ project.name }}</td>
+          <td>{{ project.tasks.length }}</td>
+          <td><progress class="progress progress-primary w-56" value="10" max="100"></progress></td>
         </tr>
       </tbody>
     </table>
     <InputModal
       :is-open="isOpen"
-      @on-sumit="onAddProject"
+      @on-sumit="store.addNewProject"
       v-on:on-close="isOpen = false"
       subtitle="Ingrese el nombre del proyecto"
     />
@@ -61,11 +60,9 @@ import FabButton from '@/modules/common/components/FabButton.vue';
 import InputModal from '@/modules/common/components/InputModal.vue';
 import AddCircle from '@/modules/common/icons/AddCircle.vue';
 import AddSquare from '@/modules/common/icons/AddSquare.vue';
+import { useProjectsStore } from '../store/projects.store';
 
+const store = useProjectsStore();
 const isOpen = ref(false);
 const isShow = ref(false);
-
-const onAddProject = (value: string) => {
-  console.log({ value });
-};
 </script>

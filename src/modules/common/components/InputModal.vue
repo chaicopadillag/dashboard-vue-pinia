@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 type Props = {
   isOpen: boolean;
@@ -44,9 +44,15 @@ type Props = {
 const input = ref('');
 const inputRef = ref<HTMLInputElement>();
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   title: 'Nuevo Proyecto',
   placeholder: 'Nombre del proyecto',
+});
+
+watch(props, ({ isOpen }) => {
+  if (isOpen) {
+    inputRef.value?.focus();
+  }
 });
 
 const emits = defineEmits<{
