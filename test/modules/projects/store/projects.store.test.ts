@@ -83,5 +83,6 @@ describe('projects.store.ts', () => {
     expect(store.projects.at(0)?.tasks.at(0)?.completedAt).toBeFalsy();
     store.toggleCompletedTask(store.projects.at(0)!.id, store.projects.at(0)!.tasks.at(0)!.id);
     expect(store.projects.at(0)?.tasks.at(0)?.completedAt).toBeTruthy();
+    expect(store.projects.at(0)?.tasks.at(0)?.completedAt).toBeInstanceOf(Date);
   });
 });
