@@ -5,10 +5,14 @@ import { computed, ref } from 'vue';
 import type { ProjectType } from '../interfaces/projects.interface';
 
 export const useProjectsStore = defineStore('projectsStore', () => {
-  const projects = ref(useLocalStorage<ProjectType[]>('projects', []));
+  const projectList = ref(useLocalStorage<ProjectType[]>('projects', []));
+
+  const projects = computed(() => projectList.value);
+  const noProjects = computed(() => projectList.value.length === 0);
+  const findProjectById = (id: string) => projectList.value.find((project) => project.id === id);
 
   const addNewProject = (name: string) => {
-    projects.value.push({
+    projectList.value.push({
       id: uuid(),
       name,
       tasks: [],
@@ -16,8 +20,9 @@ export const useProjectsStore = defineStore('projectsStore', () => {
   };
 
   return {
-    projects: computed(() => projects.value),
-    noProjects: computed(() => projects.value.length === 0),
+    projects,
+    noProjects,
+    findProjectById,
     addNewProject,
   };
 });
