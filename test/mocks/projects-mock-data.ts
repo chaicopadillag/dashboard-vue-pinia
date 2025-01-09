@@ -18,6 +18,11 @@ export const fakeProjects: ProjectType[] = [
         id: '1f44754b-bb96-4522-bbec-30a0921d7c9a',
         name: 'Aprender Vuex',
       },
+      {
+        id: '1f44754b-bb96-4522-bbec-30a0921d7c9a',
+        name: 'Aprender Composition API',
+        completedAt: new Date(),
+      },
     ],
   },
   {
@@ -27,10 +32,12 @@ export const fakeProjects: ProjectType[] = [
       {
         id: 'be9b691d-28c5-4040-bff4-3272cc75198d',
         name: 'Instalar Tailwind CSS',
+        completedAt: new Date(),
       },
       {
         id: '191091ca-3593-4a25-92f6-a9553529504d',
         name: 'Aprender Tailwind JIT',
+        completedAt: new Date(),
       },
     ],
   },
