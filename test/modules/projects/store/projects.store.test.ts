@@ -80,8 +80,8 @@ describe('projects.store.ts', () => {
     const store = useProjectsStore();
     store.addNewProject('New Project');
     store.addNewTask(store.projects.at(0)!.id, 'New Task');
+    expect(store.projects.at(0)?.tasks.at(0)?.completedAt).toBeFalsy();
     store.toggleCompletedTask(store.projects.at(0)!.id, store.projects.at(0)!.tasks.at(0)!.id);
-
     expect(store.projects.at(0)?.tasks.at(0)?.completedAt).toBeTruthy();
   });
 });
