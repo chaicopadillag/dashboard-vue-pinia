@@ -29,4 +29,14 @@ describe('<FabButton/>', () => {
     await wrapper.find('button').trigger('click');
     expect(wrapper.emitted()).toHaveProperty('click');
   });
+
+  it('Should render slot content', async () => {
+    const wrapper = shallowMount(FabButton, {
+      slots: {
+        default: '<span>Icon</span>',
+      },
+    });
+    expect(wrapper.find('button span').exists()).toBeTruthy();
+    expect(wrapper.find('button span').text()).toBe('Icon');
+  });
 });
