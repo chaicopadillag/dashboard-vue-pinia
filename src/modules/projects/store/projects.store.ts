@@ -9,7 +9,7 @@ export const useProjectsStore = defineStore('projectsStore', () => {
 
   const projects = computed(() => projectList.value);
   const noProjects = computed(() => projectList.value.length === 0);
-  const findProjectById = (id: string) => projectList.value.find((project) => project.id === id);
+  const findProjectById = (id: string) => projects.value.find((project) => project.id === id);
 
   const addNewProject = (name: string) => {
     projectList.value.push({
@@ -19,10 +19,21 @@ export const useProjectsStore = defineStore('projectsStore', () => {
     });
   };
 
+  const addNewTask = (projectId: string, taskName: string) => {
+    const project = projectList.value.find((project) => project.id === projectId);
+    if (project) {
+      project.tasks.push({
+        id: uuid(),
+        name: taskName,
+      });
+    }
+  };
+
   return {
     projects,
     noProjects,
     findProjectById,
     addNewProject,
+    addNewTask,
   };
 });
