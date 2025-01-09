@@ -20,7 +20,7 @@
             </ul>
           </details>
         </li>
-        <li v-else :key="`${projec.id}`">
+        <li v-else :key="`${projec.id}-item`">
           <RouterLink :to="`/projects/${projec.id}`">
             {{ projec.name }}
           </RouterLink>
