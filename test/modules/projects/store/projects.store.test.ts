@@ -85,4 +85,38 @@ describe('projects.store.ts', () => {
     expect(store.projects.at(0)?.tasks.at(0)?.completedAt).toBeTruthy();
     expect(store.projects.at(0)?.tasks.at(0)?.completedAt).toBeInstanceOf(Date);
   });
+
+  it('should calculate project task metrics', () => {
+    localStorage.setItem('projects', JSON.stringify(fakeProjects));
+    const store = useProjectsStore();
+    // store.$patch((state) => {
+    //   state.projectList = fakeProjects;
+    // });
+
+    const metrics = store.projectTaskMetrics;
+    expect(metrics).toHaveLength(3);
+    expect(metrics).toEqual([
+      {
+        id: fakeProjects[0].id,
+        name: fakeProjects[0].name,
+        completedTasks: 2,
+        totalTasks: 4,
+        completionRate: 50,
+      },
+      {
+        id: fakeProjects[1].id,
+        name: fakeProjects[1].name,
+        completedTasks: 2,
+        totalTasks: 2,
+        completionRate: 100,
+      },
+      {
+        id: fakeProjects[2].id,
+        name: fakeProjects[2].name,
+        completedTasks: 0,
+        totalTasks: 2,
+        completionRate: 0,
+      },
+    ]);
+  });
 });

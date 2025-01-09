@@ -12,7 +12,7 @@ export const useProjectsStore = defineStore('projectsStore', () => {
   const findProjectById = (id: string) => projects.value.find((project) => project.id === id);
 
   const projectTaskMetrics = computed(() =>
-    projects.value.map((project) => {
+    projectList.value.map((project) => {
       const totalTasks = project.tasks.length;
       const completedTasks = project.tasks.filter((task) => task.completedAt).length;
       const completionRate = totalTasks === 0 ? 0 : (completedTasks / totalTasks) * 100;
