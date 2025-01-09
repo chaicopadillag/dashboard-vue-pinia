@@ -3,8 +3,8 @@
     <h2 class="text-lg font-bold mx-4">Projects</h2>
     <p v-if="store.noProjects" class="text-sm text-gray-500 mx-4">No hay proyectos</p>
     <ul v-else class="menu">
-      <li v-for="projec in store.projects" :key="projec.id">
-        <template v-if="projec.tasks.length > 0">
+      <template v-for="projec in store.projects">
+        <li v-if="projec.tasks.length > 0" :key="projec.id">
           <details open>
             <summary>
               <RouterLink :to="`/projects/${projec.id}`">
@@ -19,15 +19,13 @@
               </li>
             </ul>
           </details>
-        </template>
-        <template v-else>
-          <li>
-            <RouterLink :to="`/projects/${projec.id}`">
-              {{ projec.name }}
-            </RouterLink>
-          </li>
-        </template>
-      </li>
+        </li>
+        <li v-else :key="`${projec.id}`">
+          <RouterLink :to="`/projects/${projec.id}`">
+            {{ projec.name }}
+          </RouterLink>
+        </li>
+      </template>
     </ul>
   </aside>
 </template>
