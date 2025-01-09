@@ -51,4 +51,37 @@ describe('projects.store.ts', () => {
       tasks: expect.any(Array),
     });
   });
+
+  it('should find project by id', () => {
+    const store = useProjectsStore();
+    store.addNewProject('New Project');
+    const project = store.findProjectById(store.projects.at(0)!.id);
+
+    expect(project).toEqual({
+      id: store.projects.at(0)!.id,
+      name: store.projects.at(0)!.name,
+      tasks: [],
+    });
+  });
+
+  it('should add new task to project', () => {
+    const store = useProjectsStore();
+    store.addNewProject('New Project');
+    store.addNewTask(store.projects.at(0)!.id, 'New Task');
+
+    expect(store.projects.at(0)?.tasks).toHaveLength(1);
+    expect(store.projects.at(0)?.tasks.at(0)).toEqual({
+      id: expect.any(String),
+      name: 'New Task',
+    });
+  });
+
+  it('should toggle completed task', () => {
+    const store = useProjectsStore();
+    store.addNewProject('New Project');
+    store.addNewTask(store.projects.at(0)!.id, 'New Task');
+    store.toggleCompletedTask(store.projects.at(0)!.id, store.projects.at(0)!.tasks.at(0)!.id);
+
+    expect(store.projects.at(0)?.tasks.at(0)?.completedAt).toBeTruthy();
+  });
 });
