@@ -11,11 +11,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(project, index) in store.projects" :key="index">
+        <tr v-for="(project, index) in store.projectTaskMetrics" :key="index">
           <th>{{ index + 1 }}</th>
           <td>{{ project.name }}</td>
-          <td>{{ project.tasks.length }}</td>
-          <td><progress class="progress progress-primary w-56" value="10" max="100"></progress></td>
+          <td>{{ project.totalTasks }}</td>
+          <td>
+            <progress
+              class="progress progress-primary w-56"
+              :value="project.completionRate"
+              max="100"
+            ></progress>
+            <span class="ml-2">{{ project.completionRate }}%</span>
+          </td>
         </tr>
       </tbody>
     </table>
