@@ -40,7 +40,6 @@ describe('<SideMenu/>', () => {
     store.projects = fakeProjects;
     store.noProjects = false;
     // store.$patch({ projects: fakeProjects, noProjects: false });
-    console.log(store.projects);
 
     await nextTick();
     // await wrapper.vm.$nextTick();
