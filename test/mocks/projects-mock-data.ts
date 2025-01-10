@@ -56,3 +56,16 @@ export const fakeProjects: ProjectType[] = [
     ],
   },
 ];
+
+export const fakeProjectTaskMetrics = fakeProjects.map((project) => {
+  const totalTasks = project.tasks.length;
+  const completedTasks = project.tasks.filter((task) => task.completedAt).length;
+  const completionRate = totalTasks === 0 ? 0 : (completedTasks / totalTasks) * 100;
+  return {
+    id: project.id,
+    name: project.name,
+    completedTasks,
+    totalTasks,
+    completionRate: Math.round(completionRate),
+  };
+});
