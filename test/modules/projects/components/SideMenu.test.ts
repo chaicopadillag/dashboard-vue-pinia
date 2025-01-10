@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import SideMenu from '@/modules/projects/components/SideMenu.vue';
 import { useProjectsStore } from '@/modules/projects/store/projects.store';
 import { createTestingPinia } from '@pinia/testing';
